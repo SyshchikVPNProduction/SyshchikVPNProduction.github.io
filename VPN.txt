@@ -224,7 +224,7 @@
     "enableConcurrency" : true,
     "probeURL" : "https://cloudflare.com/cdn-cgi/trace"
   },
-  "remarks" : "🚀 EASYGO P-V🇩🇪1648",
+  "remarks" : "VPN от Сыщика",
   "routing": {
     "balancers": [
       {
