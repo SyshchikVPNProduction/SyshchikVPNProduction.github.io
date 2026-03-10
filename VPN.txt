@@ -224,7 +224,7 @@
     "enableConcurrency" : true,
     "probeURL" : "https://cloudflare.com/cdn-cgi/trace"
   },
-  "remarks" : "VPN от Сыщика",
+  "remarks" : "VPN для нимфочки ❤️",
   "routing": {
     "balancers": [
       {
@@ -499,4 +499,5 @@
       }
     ]
   }
+
 }
