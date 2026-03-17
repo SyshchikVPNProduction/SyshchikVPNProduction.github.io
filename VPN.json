@@ -17,15 +17,19 @@
     "servers": [
       "https://8.8.8.8/dns-query",
       "https://1.1.1.1/dns-query",
-      "https+local://doh.opendns.com/dns-query",
-      "https+local://cloudflare-dns.com/dns-query",
       "208.67.222.222",
       "208.67.220.220",
+      "https+local://doh.opendns.com/dns-query",
+      "https+local://cloudflare-dns.com/dns-query",
       "77.88.8.8",
       "77.88.8.1"
     ],
     "queryStrategy": "UseIPv4",
     "disableCache": false
+  },
+  "assets": {
+    "geoipUrl": "https://github.com/Loyalsoldier/v2ray-rules-dat/releases/latest/download/geoip.dat",
+    "geositeUrl": "https://github.com/Loyalsoldier/v2ray-rules-dat/releases/latest/download/geosite.dat"
   },
   "inbounds": [
     {
@@ -100,16 +104,16 @@
   ],
   "outbounds": [
     {
-      "tag": "vless_direct",
+      "tag": "vless_ru_direct_tcp",
       "protocol": "vless",
       "settings": {
         "vnext": [
           {
-            "address": "159.195.85.64",
+            "address": "14.cloudervicesonboard.ru",
             "port": 443,
             "users": [
               {
-                "id": "4f0c3b25-4755-497e-9634-06ef4a2cae32",
+                "id": "9904288a-d327-4ad3-a9f9-071b9459a7e7",
                 "encryption": "none",
                 "flow" : "xtls-rprx-vision",
                 "security" : "auto"
@@ -122,9 +126,9 @@
         "network": "tcp",
         "security": "reality",
         "realitySettings": {
-          "serverName": "33.oncloudnineservicestreamg.com",
-          "publicKey": "IA4VB7DmJ9puOBc1uVjYk8uBNbeY0QAatIb49-OLSAM",
-          "shortId": "3801bc92095103a1",
+          "serverName": "14.cloudervicesonboard.ru",
+          "publicKey": "Kg5qKjzsMD5y525KVaaAwVvQQ5iabcfA00AxR_tfBGQ",
+          "shortId": "52a8470856d31de8",
           "fingerprint": "chrome"
         },
         "tcpSettings" : {
@@ -135,16 +139,16 @@
       }
     },
     {
-      "tag": "vless_proxy",
+      "tag": "vless_eu_direct_tcp",
       "protocol": "vless",
       "settings": {
         "vnext": [
           {
-            "address": "1.ru.oncloudnineservicestreamg.com",
+            "address": "09.oncloudnineservicestreamf.com",
             "port": 443,
             "users": [
               {
-                "id": "4f0c3b25-4755-497e-9634-06ef4a2cae32",
+                "id": "9904288a-d327-4ad3-a9f9-071b9459a7e7",
                 "encryption": "none",
                 "flow" : "xtls-rprx-vision",
                 "security" : "auto"
@@ -157,9 +161,9 @@
         "network": "tcp",
         "security": "reality",
         "realitySettings": {
-          "serverName": "33.oncloudnineservicestreamg.com",
-          "publicKey": "IA4VB7DmJ9puOBc1uVjYk8uBNbeY0QAatIb49-OLSAM",
-          "shortId": "3801bc92095103a1",
+          "serverName": "09.oncloudnineservicestreamf.com",
+          "publicKey": "CAjXlzdLqvjlptL8eKthUTyBBroIGOBc8NeGtkyC8wo",
+          "shortId": "680afa9d3f8127d9",
           "fingerprint": "chrome"
         },
         "tcpSettings" : {
@@ -170,37 +174,36 @@
       }
     },
     {
-      "tag": "tiktok-proxy",
+      "tag": "vless_ru_fallback_xhttp",
       "protocol": "vless",
       "settings": {
         "vnext": [
           {
-            "address": "1.ru.oncloudnineservicestreamg.com",
-            "port": 443,
+            "address": "14.cloudervicesonboard.ru",
+            "port": 8443,
             "users": [
               {
-                "id": "4f0c3b25-4755-497e-9634-06ef4a2cae32",
+                "id": "9904288a-d327-4ad3-a9f9-071b9459a7e7",
                 "encryption": "none",
-                "flow" : "xtls-rprx-vision",
                 "security" : "auto"
               }
             ]
           }
         ]
       },
-      "streamSettings": {
-        "network": "tcp",
-        "security": "reality",
-        "realitySettings": {
-          "serverName": "33.oncloudnineservicestreamg.com",
-          "publicKey": "IA4VB7DmJ9puOBc1uVjYk8uBNbeY0QAatIb49-OLSAM",
-          "shortId": "3801bc92095103a1",
-          "fingerprint": "chrome"
+      "streamSettings" : {
+        "network" : "xhttp",
+        "security" : "tls",
+        "tlsSettings" : {
+          "allowInsecure" : false,
+          "fingerprint" : "chrome",
+          "rejectUnknownSni" : false,
+          "serverName" : "14.cloudervicesonboard.ru"
         },
-        "tcpSettings" : {
-          "header" : {
-            "type" : "none"
-          }
+        "xHTTPSettings" : {
+          "host" : "",
+          "mode" : "auto",
+          "path" : ""
         }
       }
     },
@@ -215,49 +218,74 @@
       "settings": {}
     }
   ],
-  "observatory": {
+  "burstObservatory": {
     "subjectSelector": [
-      "vless_direct",
-      "vless_proxy"
+      "vless_ru_direct_tcp",
+      "vless_eu_direct_tcp",
+      "vless_ru_fallback_xhttp"
     ],
-    "probeInterval" : "1m",
-    "enableConcurrency" : true,
-    "probeURL" : "https://cloudflare.com/cdn-cgi/trace"
+    "pingConfig": {
+      "destination": "https://www.google.com/generate_204",
+      "connectivity": "",
+      "interval": "90s",
+      "sampling": 5,
+      "timeout": "5s"
+    }
   },
-  "remarks" : "VPN для нимфочки ❤️",
+  "remarks" : "Люблю тебя ❤️ | VPN для нимфочки ❤️",
   "routing": {
     "balancers": [
       {
-        "tag": "balancer1",
+        "tag": "main_balancer",
         "selector": [
-          "vless_direct"
+          "vless_ru_direct_tcp",
+          "vless_eu_direct_tcp"
         ],
         "strategy": {
-          "type": "leastPing"
+          "type": "leastLoad",
+          "settings": {
+            "expected": 1,
+            "costs": [
+              {
+                "match": "vless_ru_direct_tcp",
+                "value": 100000000
+              },
+              {
+                "match": "vless_eu_direct_tcp",
+                "value": 1
+              }
+            ]
+          }
         },
-        "fallbackTag": "vless_proxy"
+        "fallbackTag": "vless_ru_fallback_xhttp"
       },
       {
-        "tag": "proxy_balancer",
+        "tag": "youtube_balancer",
         "selector": [
-          "vless_proxy"
+          "vless_ru_direct_tcp",
+          "vless_eu_direct_tcp"
         ],
         "strategy": {
-          "type": "leastPing"
+          "type": "leastLoad",
+          "settings": {
+            "expected": 1,
+            "costs": [
+              {
+                "match": "vless_ru_direct_tcp",
+                "value": 1
+              },
+              {
+                "match": "vless_eu_direct_tcp",
+                "value": 100000000
+              }
+            ]
+          }
         },
-        "fallbackTag": "vless_direct"
+        "fallbackTag": "vless_ru_fallback_xhttp"
       }
     ],
     "domainStrategy": "IPIfNonMatch",
     "rules": [
-      {
-        "type": "field",
-        "domain": [
-          "domain:whatsapp.net",
-          "domain:whatsapp.com"
-        ],
-        "balancerTag": "proxy_balancer"
-      },
       {
         "type": "field",
         "ip": [
@@ -270,6 +298,12 @@
           "socks-direct"
         ],
         "outboundTag" : "direct"
+      },
+      {
+        "domain" : [
+          "geosite:youtube"
+        ],
+        "balancerTag" : "youtube_balancer"
       },
       {
         "type": "field",
@@ -334,74 +368,255 @@
           "domain:habrastorage.org",
           "domain:onlinesim.io"
         ],
-        "balancerTag": "balancer1"
+        "balancerTag": "main_balancer"
       },
       {
         "type": "field",
         "protocol": [
           "bittorrent"
         ],
-        "outboundTag": "direct"
+        "outboundTag": "block"
       },
       {
-        "domain" : [
-          "domain:adobe.com",
-          "domain:canva.com",
-          "domain:deepmind.com",
-          "domain:deepmind.google",
-          "domain:geller-pa.googleapis.com",
-          "domain:generativelanguage.googleapis.com",
-          "domain:proactivebackend-pa.googleapis.com",
-          "domain:ai.google.dev",
-          "domain:alkalicore-pa.clients6.google.com",
-          "domain:alkalimakersuite-pa.clients6.google.com",
-          "domain:generativeai.google",
-          "domain:makersuite.google.com",
-          "domain:aistudio.google.com",
-          "domain:bard.google.com",
-          "domain:gemini.google",
-          "domain:gemini.google.com",
+        "type": "field",
+        "domain": [
+          "domain:retracker.local",
+          "domain:t-ru.org",
+          "domain:opentrackr.org",
+          "domain:open.stealth.si",
+          "domain:torrent.eu.org",
+          "domain:bittor.pw",
+          "domain:popcorn-tracker.org",
+          "domain:tracker.dler.org",
+          "domain:exodus.desync.com",
+          "domain:open.demonii.com",
+          "domain:glotorrents.pw",
+          "domain:coppersurfer.tk",
+          "domain:torrent.gresille.org",
+          "domain:p4p.arenabg.com",
+          "domain:tracker.internetwarriors.net",
+          "domain:trackerfix.com",
+          "domain:rarbg.me",
+          "domain:rarbg.to",
+          "domain:tracker.thinelephant.org",
+          "domain:tracker.fatkhoala.org",
+          "domain:openbittorrent.com",
+          "domain:opentracker.i2p.rocks",
+          "domain:tracker.leechers-paradise.org",
+          "domain:tracker.zer0day.to",
+          "domain:tracker.pomf.se",
+          "domain:tracker.publicbt.com",
+          "domain:tracker.istole.it",
+          "domain:nyaa.tracker.wf",
+          "domain:tracker2.dler.com",
+          "domain:pow7.com",
+          "domain:tracker.bitsearch.to",
+          "domain:tracker.breizh.pm",
+          "domain:bubu.mapfactor.com",
+          "domain:tracker.cyberia.is",
+          "domain:explodie.org",
+          "domain:tracker.birkenwald.de",
+          "domain:tracker.moeking.me",
+          "domain:tracker.harry.lu",
+          "domain:ttk2.nbaonlineservice.com",
+          "domain:ec2-18-191-163-220.us-east-2.compute.amazonaws.com",
+          "domain:evan.im",
+          "domain:tracker.0x7c0.com",
+          "domain:amigacity.xyz",
           "domain:rutracker.org",
-          "habr.com",
-          "4pda.to",
-          "4pda.ru",
-          "kemono.su",
-          "jut.su",
-          "kara.su",
-          "theins.ru",
-          "tvrain.ru",
-          "echo.msk.ru",
-          "the-village.ru",
-          "snob.ru",
-          "novayagazeta.ru",
-          "moscowtimes.ru",
-          "geosite:tiktok",
-          "tiktok.com",
-          "tiktokv.com",
-          "tiktokv.eu",
-          "tiktokv.us",
-          "tiktokw.eu",
-          "tiktokw.us",
-          "tiktokcdn.com",
-          "tiktokcdn-eu.com",
-          "tiktokcdn-us.com",
-          "tiktokeu-cdn.com",
-          "tiktokrow-cdn.com",
-          "tiktokd.net",
-          "tiktokd.org",
-          "tik-tokapi.com",
-          "byteoversea.com",
-          "bytedance.com",
-          "byteimg.com",
-          "ibytedtos.com",
-          "muscdn.com",
-          "musical.ly",
-          "ttlivecdn.com",
-          "ttoverseaus.net",
-          "ttwstatic.com",
-          "full:p16-tiktokcdn-com.akamaized.net"
+          "domain:rutracker.nl",
+          "domain:rutracker.net",
+          "domain:thepiratebay.org",
+          "domain:thepiratebay.zone",
+          "domain:pirateproxy.live",
+          "domain:pirate-proxy.ink",
+          "domain:pirateproxy-bay.com",
+          "domain:tpbproxypirate.com",
+          "domain:proxifiedpiratebay.org",
+          "domain:ukpirate.co",
+          "domain:mirrorbay.top",
+          "domain:tpb.skynetcloud.site",
+          "domain:tpb25.ukpass.co",
+          "domain:1337x.to",
+          "domain:1337x.hashhackers.com",
+          "domain:1337x-to.pages.dev",
+          "domain:1337x.torrentbay.to",
+          "domain:1337x.unblockninja.com",
+          "domain:1337x.unblockproject.click",
+          "domain:1337x.unbl0ck.info",
+          "domain:eztv.lt",
+          "domain:eztv.tf",
+          "domain:eztv.re",
+          "domain:eztv.daytorrents.com",
+          "domain:eztv.work",
+          "domain:eztv.unblockninja.com",
+          "domain:eztv.unblockit.nz",
+          "domain:rarbg.to",
+          "domain:rarbgproxy.org",
+          "domain:torrentsbay.org",
+          "domain:therarbg.com",
+          "domain:proxyrarbg.org",
+          "domain:rarbgaccess.org",
+          "domain:rarbgget.org",
+          "domain:rarbgunblock.com",
+          "domain:rarbg.unblockninja.com",
+          "domain:extratorrent.cc",
+          "domain:extratorrents.ch",
+          "domain:extratorrent.st",
+          "domain:extratorrentsnew.xyz",
+          "domain:extratorrent.proxyninja.org",
+          "domain:extratorrent.proxyninja.net",
+          "domain:extratorrent.ninjaproxy1.com",
+          "domain:extratorrent.piratic.org",
+          "domain:yts.mx",
+          "domain:yts-mx.my",
+          "domain:yts.unblockit.ink",
+          "domain:yts.rs",
+          "domain:yts.pm",
+          "domain:yts.mx",
+          "domain:yts.io",
+          "domain:kickass.to",
+          "domain:kickass.cd",
+          "domain:proxyindex.net",
+          "domain:kickasstorrents.pw",
+          "domain:thekat.info",
+          "domain:kat.am",
+          "domain:katcr.to",
+          "domain:zamunda.net",
+          "domain:zamunda.ch",
+          "domain:zamunda.se",
+          "domain:www.bgproxy.org",
+          "domain:bg-zamunda.net",
+          "domain:tracker.opentrackr.org",
+          "domain:open.demonii.com",
+          "domain:open.stealth.si",
+          "domain:exodus.desync.com",
+          "domain:explodie.org",
+          "domain:wepzone.net",
+          "domain:ttk2.nbaonlineservice.com",
+          "domain:tracker2.dler.org",
+          "domain:tracker.tryhackx.org",
+          "domain:tracker.theoks.net",
+          "domain:tracker.srv00.com",
+          "domain:tracker.qu.ax",
+          "domain:tracker.hifimarket.in",
+          "domain:tracker.fnix.net",
+          "domain:tracker.dler.org",
+          "domain:tracker.bittor.pw",
+          "domain:tracker-udp.gbitt.info",
+          "domain:t.overflow.biz",
+          "domain:run.publictracker.xyz",
+          "domain:retracker01-msk-virt.corbina.net",
+          "domain:public.tracker.vraphim.com",
+          "domain:p4p.arenabg.com",
+          "domain:opentracker.io",
+          "domain:open.dstud.io",
+          "domain:martin-gebhardt.eu",
+          "domain:ipv4announce.sktorrent.eu",
+          "domain:evan.im",
+          "domain:discord.heihachi.pw",
+          "domain:d40969.acod.regrucolo.ru",
+          "domain:bittorrent-tracker.e-n-c-r-y-p-t.net",
+          "domain:6ahddutb1ucc3cp.ru",
+          "domain:1c.premierzal.ru",
+          "domain:tracker.yemekyedim.com",
+          "domain:tracker.pmman.tech",
+          "domain:tracker.moeblog.cn",
+          "domain:tracker.cutie.dating",
+          "domain:tracker.bt4g.com",
+          "domain:t1.hloli.org",
+          "domain:www.torrentsnipe.info",
+          "domain:www.genesis-sp.org",
+          "domain:wepzone.net",
+          "domain:tracker810.xyz",
+          "domain:tracker2.dler.org",
+          "domain:tracker1.bt.moack.co.kr",
+          "domain:tracker.xiaoduola.xyz",
+          "domain:tracker.vanitycore.co",
+          "domain:tracker.sbsub.com",
+          "domain:tracker.renfei.net",
+          "domain:tracker.qu.ax",
+          "domain:tracker.mywaifu.best",
+          "domain:tracker.moxing.party",
+          "domain:tracker.lintk.me",
+          "domain:tracker.ipv6tracker.org",
+          "domain:tracker.dmcomic.org",
+          "domain:tracker.dler.org",
+          "domain:tracker.cutie.dating",
+          "domain:tracker.corpscorp.online",
+          "domain:tracker.bz",
+          "domain:tracker.bt4g.com",
+          "domain:tracker.bt-hash.com",
+          "domain:tracker.bittor.pw",
+          "domain:tr.kxmp.cf",
+          "domain:torrent.hificode.in",
+          "domain:t.overflow.biz",
+          "domain:shubt.net",
+          "domain:share.hkg-fansub.info",
+          "domain:servandroidkino.ru",
+          "domain:seeders-paradise.org",
+          "domain:retracker.spark-rostov.ru",
+          "domain:public.tracker.vraphim.com",
+          "domain:p4p.arenabg.com",
+          "domain:open.trackerlist.xyz",
+          "domain:home.yxgz.club",
+          "domain:extracker.dahrkael.net",
+          "domain:buny.uk",
+          "domain:bt1.xxxxbt.cc",
+          "domain:bt.poletracker.org",
+          "domain:bittorrent-tracker.e-n-c-r-y-p-t.net",
+          "domain:0d.kebhana.mx",
+          "domain:0123456789nonexistent.com",
+          "domain:udp.tracker.projectk.org",
+          "domain:tracker.zupix.online",
+          "domain:tracker.valete.tf",
+          "domain:tracker.torrust-demo.com",
+          "domain:tracker.therarbg.to",
+          "domain:tracker.skillindia.site",
+          "domain:tracker.plx.im",
+          "domain:tracker.hifitechindia.com",
+          "domain:tracker.healthcareindia.store",
+          "domain:tracker.gmi.gd",
+          "domain:tracker.gigantino.net",
+          "domain:tracker.bitcoinindia.space",
+          "domain:tr4ck3r.duckdns.org",
+          "domain:retracker.lanta.me",
+          "domain:ipv4.rer.lol",
+          "domain:concen.org",
+          "domain:bt.rer.lol",
+          "domain:bt.rer.lol",
+          "domain:bandito.byterunner.io",
+          "domain:tracker.zhuqiy.top",
+          "domain:tracker.leechshield.link",
+          "domain:tracker.ghostchu-services.top",
+          "domain:tracker.gcrenwp.top",
+          "domain:tracker.aburaya.live",
+          "domain:tr.zukizuki.org",
+          "domain:tracker1.itzmx.com",
+          "domain:tracker.zhuqiy.top",
+          "domain:tracker.waaa.moe",
+          "domain:tracker.valete.tf",
+          "domain:tracker.tritan.gg",
+          "domain:tracker.privateseedbox.xyz",
+          "domain:tracker.ghostchu-services.top",
+          "domain:tracker.darkness.services",
+          "domain:tracker.23794.top",
+          "domain:ipv4.rer.lol",
+          "domain:1337.abcvg.info",
+          "domain:tracker.btorrent.xyz",
+          "domain:tracker.webtorrent.dev",
+          "domain:tracker.ghostchu-services.top",
+          "domain:tracker.files.fm",
+          "domain:tracker.ghostchu-services.top",
+          "domain:tracker.files.fm",
+          "domain:opentracker.dg2.i2p",
+          "domain:opentracker.eeptorrent.i2p",
+          "domain:opentracker.fattydove.i2p",
+          "domain:opentracker.r4sas.i2p",
+          "domain:opentracker.simp.i2p",
+          "domain:opentracker.skank.i2p"
         ],
-        "outboundTag" : "tiktok-proxy"
+        "outboundTag": "block"
       },
       {
         "type": "field",
@@ -489,15 +704,21 @@
       },
       {
         "type": "field",
+        "ip": [
+          "geoip:ru"
+        ],
+        "outboundTag": "direct"
+      },
+      {
+        "type": "field",
         "ip": [ "8.8.8.8", "1.1.1.1", "208.67.222.222", "208.67.220.220", "77.88.8.8", "77.88.8.1"],
         "port": "53",
         "outboundTag": "direct"
       },
       {
-        "balancerTag": "balancer1",
+        "balancerTag": "main_balancer",
         "network": "tcp,udp"
       }
     ]
   }
-
 }
