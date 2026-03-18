@@ -1,6 +1,5 @@
-STATUS=❤️ ВСЁ ДЛЯ ТЕБЯ ❤️ | Остаток: 999 ГБ
-# Profile-Name: VPN Любимой (Если не работает — обнови)
+# Profile-Name: 💖 VPN ДЛЯ ЛЮБИМОЙ 💖 (Обнови, если не работает)
 # Subscription-Userinfo: upload=0; download=0; total=1073741824000; expire=4070908800
 
-vless://3d790755-2948-4b91-b676-5d1b9a98ac07@185.216.177.143:443?encryption=none&flow=xtls-rprx-vision&security=reality&sni=32.oncloudnineservicestreamu.com&fp=chrome&pbk=fn3n9WF9-UxM0d7yJLWkqdnsArzoOUXRg7KZClB30FI&sid=66529e9b7ce155d8&type=tcp&headerType=noneА я тебя 
-vless://2ccdee0d-ea87-4db0-979d-667281c3b304@de.vpn-club-service.ru:443?encryption=none&flow=xtls-rprx-vision&security=reality&sni=help.max.ru&fp=chrome&pbk=yDPh2enztmRE8NH294bVNoILyZaQmZnH1gBvrd9RGQo&sid=a1b2c3d4&type=tcp&headerType=none Люблю ❤️
+vless://3d790755-2948-4b91-b676-5d1b9a98ac07@185.216.177.143:443?encryption=none&flow=xtls-rprx-vision&security=reality&sni=32.oncloudnineservicestreamu.com&fp=chrome&pbk=fn3n9WF9-UxM0d7yJLWkqdnsArzoOUXRg7KZClB30FI&sid=66529e9b7ce155d8&type=tcp&headerType=none#%F0%9F%87%B7%F0%9F%87%BA%20%D0%90%20%D1%8F%20%D1%82%D0%B5%D0%B1%D1%8F...%20%F0%9F%92%9E
+vless://2ccdee0d-ea87-4db0-979d-667281c3b304@de.vpn-club-service.ru:443?encryption=none&flow=xtls-rprx-vision&security=reality&sni=help.max.ru&fp=chrome&pbk=yDPh2enztmRE8NH294bVNoILyZaQmZnH1gBvrd9RGQo&sid=a1b2c3d4&type=tcp&headerType=none#%F0%9F%87%A9%F0%9F%87%AA%20%D0%9B%D1%8E%D0%B1%D0%BB%D1%8E%20%E2%9D%A4%EF%B8%8F
